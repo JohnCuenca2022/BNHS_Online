@@ -1,3 +1,91 @@
+<script>
+import { ref } from 'vue';
+import { createNewUser, redirectUserToHome } from '../backend/auth.js'
+import { useToast } from "vue-toastification";
+
+redirectUserToHome()
+
+export default {
+    setup() {
+		const toast = useToast();
+		function showErrorToast() {
+			toast.error("Incomplete data.", {
+			position: "top-right",
+			timeout: 5000,
+			closeOnClick: true,
+			pauseOnFocusLoss: true,
+			pauseOnHover: true,
+			draggable: true,
+			draggablePercent: 0.6,
+			showCloseButtonOnHover: false,
+			hideProgressBar: true,
+			closeButton: "button",
+			icon: true,
+			rtl: false
+			});
+		};
+
+		const userEmail = ref("");
+		const firstName = ref("");
+		const lastName = ref("");
+		const studentNumber = ref("");
+		const userName = ref("");
+		const userPass = ref("");
+
+
+		const getValue = () => {
+			console.log(userEmail.value);
+			console.log(firstName.value);
+			console.log(lastName.value);
+			console.log(studentNumber.value);
+			console.log(userName.value);
+			console.log(userPass.value);
+
+			if (userEmail.value == ""){
+			showErrorToast()
+			return
+			}
+			if (firstName.value == ""){
+			showErrorToast()
+			return
+			}
+			if (lastName.value == ""){
+			showErrorToast()
+			return
+			}
+			if (studentNumber.value == ""){
+			showErrorToast()
+			return
+			}
+			if (userName.value == ""){
+			showErrorToast()
+			return
+			}
+			if (userPass.value == ""){
+			showErrorToast()
+			return
+			}
+
+			createNewUser(userEmail.value, userPass.value, firstName.value, lastName.value, studentNumber.value)
+		};
+
+		// onMounted(() => {
+		//   userEmail.focus();
+		// });
+
+		return {
+			userEmail,
+			firstName,
+			lastName,
+			studentNumber,
+			userName,
+			userPass,
+			getValue
+		};
+    }
+  }
+</script>
+
 <template>
 	<div class="wrapper">
 	  <form class="form-signin">
@@ -8,34 +96,34 @@
   
 		<div>
 		  <label class="control-label">Email</label>
-		  <input type="text" class="form-control" name="site" placeholder="yourdomain.com" required autofocus>
+		  <input v-model="userEmail" type="text" class="form-control" name="site" placeholder="yourdomain.com" required autofocus>
 		</div>
 
         <div>
 		  <label class="control-label">First Name</label>
-		  <input type="text" class="form-control" name="site" placeholder="Enter First Name" required autofocus>
+		  <input v-model="firstName" type="text" class="form-control" name="site" placeholder="Enter First Name" required autofocus>
 		</div>
 
         <div>
 		  <label class="control-label"> Last Name</label>
-		  <input type="text" class="form-control" name="site" placeholder="Enter Last Name" required autofocus>
+		  <input v-model="lastName" type="text" class="form-control" name="site" placeholder="Enter Last Name" required autofocus>
 		</div>
 
         <div>
 		  <label class="control-label">Student Number</label>
-		  <input type="text" class="form-control" name="site" placeholder="Enter Your/Your Child's Stud. #" required autofocus>
+		  <input v-model="studentNumber" type="text" class="form-control" name="site" placeholder="Enter Your/Your Child's Stud. #" required autofocus>
 		</div>
 
         <div>
 		  <label class="control-label">Username</label>
-		  <input type="text" class="form-control" name="site" placeholder="Enter a Username" required autofocus>
+		  <input v-model="userName" type="text" class="form-control" name="site" placeholder="Enter a Username" required autofocus>
 		</div>
 
 		<div>
 		  <label class="control-label">Password</label>
-		  <input type="password" class="form-control" name="password" placeholder="*******" required autofocus>
+		  <input v-model="userPass" type="password" class="form-control" name="password" placeholder="*******" required autofocus>
 		</div>  
-		<button class="btn btn-lg btn-success btn-block d-grid gap-2 col-6 mx-auto" type="submit">REGISTER</button><br><br>
+		<button class="btn btn-lg btn-success btn-block d-grid gap-2 col-6 mx-auto" type="button" @click="getValue" >REGISTER</button><br><br>
 		<p class="text-center">Already have an account?
 			<router-link class="nav-link text-center" to="/login"><strong>Login here!</strong></router-link></p>
 	  </form>
