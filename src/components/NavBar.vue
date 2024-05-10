@@ -1,3 +1,16 @@
+<script>
+import { signOutUser } from '../backend/auth.js'
+
+export default {
+    setup() {
+
+		return {
+			signOutUser
+		};
+    }
+  }
+</script>
+
 <template>
     <nav class="navbar navbar-expand-lg">
         <router-link class="navbar-brand" to="/">
@@ -23,6 +36,9 @@
             </li>
           </ul>
           <ul class="navbar-nav flex-grow-0" style="margin-left: auto;">
+            <li class="nav-item">
+              <p @click="signOutUser" class="nav-link" style="cursor: pointer; margin-top: 0.8rem">Logout</p>
+            </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/login"><img src="../assets/account.png" alt="user" style="width: 50px; height: 50px;"></router-link>
             </li>
