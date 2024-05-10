@@ -22,25 +22,31 @@
         <!-- ABOUT US MAIN -->
         <div class="col-sm-8">
           <h3 class="text-center">The DEPED Vision</h3>
-          <img src="../assets/bnhslogo.png" class="img-fluid mx-auto d-block img-responsive margin" style="width:30%"
-            alt="Image"><br>
-          <h2>THE DEPED VISION
-            We dream of Filipinos
-            who passionately love their country
-            and whose values and competencies
-            enable them to realize their full potential
-            and contribute meaningfully to building the nation.<br>
+          <img src="../assets/depedlogo.png" class="img-fluid mx-auto d-block img-responsive margin" style="width:30%"
+            alt="Image"><br><br>
+          <h2>
+            We dream of Filipinos <br>
+            who passionately love their country <br>
+            and whose values and competencies <br>
+            enable them to realize their full potential <br>
+            and contribute meaningfully to building the nation.<br><br>
 
-            As a learner-centered public institution,
-            the Department of Education
-            continuously improves itself
+            As a learner-centered public institution, <br>
+            the Department of Education <br>
+            continuously improves itself <br>
             to better serve its stakeholders.</h2>
-          <h3 class="mt-5 text-center">Our Mission</h3>
-          <img src="../assets/bnhslogo.png" class="img-fluid mx-auto d-block img-responsive margin" style="width:30%"
-            alt="Image"><br>
-          <h2>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco.</h2>
+          <h3 class="mt-5 text-center">The DEPED Mission</h3>
+          <img src="../assets/depedlogo.png" class="img-fluid mx-auto d-block img-responsive margin" style="width:30%"
+            alt="Image"><br><br>
+          <h2>To protect and promote the right of every Filipino to quality, equitable, culture-based, and complete
+            basic education where: <br>
+
+            Students learn in a child-friendly, gender-sensitive, safe, and motivating environment.<br>
+            Teachers facilitate learning and constantly nurture every learner.<br>
+            Administrators and staff, as stewards of the institution, ensure an enabling and supportive environment for
+            effective learning to happen.<br>
+            Family, community, and other stakeholders are actively engaged and share responsibility for developing
+            life-long learners.<br></h2>
         </div>
       </div>
     </div>
@@ -62,9 +68,10 @@ h1 {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 15px;
   font-family: "Poppins", sans-serif;
   color: #02231c;
+  text-align: center;
 }
 
 h3 {
@@ -72,6 +79,7 @@ h3 {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   color: #02231c;
+  text-align: center;
 }
 
 p {
