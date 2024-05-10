@@ -6,9 +6,30 @@
           <h2>Stay updated with the latest school announcements through this page.</h2>
       </div>
       <!-- ANNOUNCEMENT POSTS PLACEHOLDER -->
-      <div><h3>dito mga posts</h3></div>
+      <div class="announcement-posts">
+        <AnnouncementPost v-for="announcement in announcements" :key="announcement.id" :announcement="announcement" />
+      </div>
   </div>
 </template>
+
+<script>
+import AnnouncementPost from '@/components/AnnouncementPost.vue';
+
+export default {
+  components: {
+    AnnouncementPost
+  },
+  data() {
+    return {
+      announcements: [
+      { id: 1, title: "Important Announcement", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec leo vel eros vestibulum vulputate. Integer ac nulla ut odio aliquet cursus." },
+        { id: 2, title: "Upcoming Event", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec leo vel eros vestibulum vulputate. Integer ac nulla ut odio aliquet cursus." },
+        { id: 3, title: "Reminder", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec leo vel eros vestibulum vulputate. Integer ac nulla ut odio aliquet cursus." }
+      ]
+    };
+  }
+};
+</script>
 
 <style scoped>
 .custom-bg {
