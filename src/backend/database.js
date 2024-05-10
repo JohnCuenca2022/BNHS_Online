@@ -107,6 +107,8 @@ export async function createNewUserData(userID, email, firstname, lastname, stud
           lastname: lastname,
           studentNumber: studentNumber,
           dateJoined: Timestamp.now(),
+        }).then(() => {
+            window.location.href = '/';
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
