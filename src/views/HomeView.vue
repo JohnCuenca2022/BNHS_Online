@@ -18,21 +18,18 @@
       <h1 class="margin" style="color:#48bf53">🖥️ Welcome to BNHS ONLINE!</h1><br>
       <div class="row">
         <div class="col-sm-4">
-          <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.</h4><br>
-          <img src="../assets/login.png" class="img-responsive margin" style="width:60%"
+          <h4>Engage in lively discussions and stay updated with the latest announcements on BNHS ONLINE, your one-stop school forum portal.</h4><br>
+          <img src="../assets/bilog1.png" class="img-responsive margin" style="width:60%"
             alt="Image">
         </div>
         <div class="col-sm-4">
-          <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.</h4><br>
-          <img src="../assets/login.png" class="img-responsive margin" style="width:60%"
+          <h4>Stay informed and involved in school activities, discussions, and announcements with BNHS ONLINE, your go-to platform for all things school-related.</h4><br>
+          <img src="../assets/bilog2.png" class="img-responsive margin" style="width:60%"
             alt="Image">
         </div>
         <div class="col-sm-4">
-          <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.</h4><br>
-          <img src="../assets/login.png" class="img-responsive margin" style="width:60%"
+          <h4>From important announcements to lively discussions, BNHS ONLINE brings our school community together in one dynamic forum portal.</h4><br>
+          <img src="../assets/bilog3.png" class="img-responsive margin" style="width:60%"
             alt="Image">
         </div>
       </div>
