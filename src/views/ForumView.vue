@@ -28,7 +28,12 @@
             <p>Please make sure to adhere to our forum guidelines.</p>
             <form action="/action_page.php">
               <div class="mb-3 mt-3">
-                <textarea class="form-control" rows="3" id="comment" name="text"></textarea>
+                <label for="comment">Title:</label>
+                <textarea class="form-control" rows="1" id="comment" name="text"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="anotherComment">Body:</label>
+                <textarea class="form-control" rows="3" id="anotherComment" name="anotherText"></textarea>
               </div>
               <button type="submit" class="btn btn-success btn-lg">Submit</button>
             </form>
