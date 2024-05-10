@@ -10,8 +10,8 @@
         <!-- FORUM GUIDELINES -->
         <div class="col-sm-4 bg-light mt-4 rounded">
           <br>
-          <img src="../assets/bnhslogo.png"
-            class="img-fluid mx-auto d-block img-responsive margin" style="width:50%" alt="Image">
+          <img src="../assets/bnhslogo.png" class="img-fluid mx-auto d-block img-responsive margin" style="width:50%"
+            alt="Image">
           <h3 class="mt-4 text-center">Bacoor National High School - Georgetown Annex</h3><br>
           <p>📍 Georgetown Heights I, Molino IV, Bacoor, Cavite</p>
           <p>📞 (046) 454 3822</p>
@@ -21,15 +21,23 @@
 
         <!-- ABOUT US MAIN -->
         <div class="col-sm-8">
-          <h3 class="text-center">Our Vision</h3>
-          <img src="../assets/bnhslogo.png"
-            class="img-fluid mx-auto d-block img-responsive margin" style="width:30%" alt="Image"><br>
-          <h2>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco.</h2>
+          <h3 class="text-center">The DEPED Vision</h3>
+          <img src="../assets/bnhslogo.png" class="img-fluid mx-auto d-block img-responsive margin" style="width:30%"
+            alt="Image"><br>
+          <h2>THE DEPED VISION
+            We dream of Filipinos
+            who passionately love their country
+            and whose values and competencies
+            enable them to realize their full potential
+            and contribute meaningfully to building the nation.<br>
+
+            As a learner-centered public institution,
+            the Department of Education
+            continuously improves itself
+            to better serve its stakeholders.</h2>
           <h3 class="mt-5 text-center">Our Mission</h3>
-          <img src="../assets/bnhslogo.png"
-            class="img-fluid mx-auto d-block img-responsive margin" style="width:30%" alt="Image"><br>
+          <img src="../assets/bnhslogo.png" class="img-fluid mx-auto d-block img-responsive margin" style="width:30%"
+            alt="Image"><br>
           <h2>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
             ullamco.</h2>
