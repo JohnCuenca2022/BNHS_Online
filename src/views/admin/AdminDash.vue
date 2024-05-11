@@ -1,8 +1,8 @@
-<template>
+<template><br><br>
+<h1 class="text-center">Welcome to the Admin Dashboard!</h1>
   <div class="admin-dashboard">
-    <h1>Welcome to Admin Dashboard</h1>
     <AnnouncementForm @new-announcement="handleNewAnnouncement" />
-  </div>
+  </div><br><br>
 </template>
 
 <script>

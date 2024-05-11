@@ -10,7 +10,7 @@
           <label for="content">Content:</label>
           <textarea id="content" v-model="content" class="form-control" rows="5" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-lg btn-success btn-block d-grid gap-2 col-6 mx-auto">Submit</button>
       </form>
     </div>
   </template>
