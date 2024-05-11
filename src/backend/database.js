@@ -110,7 +110,6 @@ export async function createNewUserData(userID, email, firstname, lastname, stud
             dateJoined: Timestamp.now(),
         }).then(() => {
             window.location.href = '/';
-            console.log("user created")
         });
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
@@ -127,5 +126,23 @@ export async function getUserData(userID) {
     } else {
         // docSnap.data() will be undefined in this case
         return undefined
+    }
+}
+
+export async function isUserAdmin(userID) {
+    const docRef = doc(db, "users", userID);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("user is")
+        var isAdmin = docSnap.data().isAdmin
+        console.log(isAdmin)
+        if (docSnap.data().isAdmin == undefined) {
+            isAdmin = false
+        }
+        return isAdmin
+    } else {
+        // docSnap.data() will be undefined in this case
+        return false
     }
 }
