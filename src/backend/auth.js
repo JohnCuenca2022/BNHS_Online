@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../firebaseConfig'
-import { 
-    getAuth, 
-    createUserWithEmailAndPassword, 
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     sendPasswordResetEmail,
@@ -13,22 +13,22 @@ import { createNewUserData } from "./database";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export function createNewUser(email, password, firstname, lastname, studentNumber){
+export function createNewUser(email, password, firstname, lastname, studentNumber) {
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        createNewUserData(user.uid, email, firstname, lastname, studentNumber)
-        window.location.href = '/';
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage)
-    });
+        .then((userCredential) => {
+            // Signed up 
+            const user = userCredential.user;
+            createNewUserData(user.uid, email, firstname, lastname, studentNumber)
+            //window.location.href = '/';
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage)
+        });
 }
 
-export async function signInUser(email, password){
+export async function signInUser(email, password) {
 
     try {
         await signInWithEmailAndPassword(auth, email, password)
@@ -41,26 +41,42 @@ export async function signInUser(email, password){
 
 }
 
-export function getUser(){
+export function getUser() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/auth.user
-          const uid = user.uid;
-          console.log(uid)
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            console.log(uid)
         } else {
-          // User is signed out
-          console.log("User not logged in")
+            // User is signed out
+            console.log("User not logged in")
         }
     });
 }
 
-export function signOutUser(){
+export function getUserID() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            console.log(uid)
+            return uid
+        } else {
+            // User is signed out
+            console.log("User not logged in")
+            return undefined
+        }
+    });
+}
+
+export function signOutUser() {
     signOut(auth).then(() => {
         window.location.href = '/';
-      }).catch((error) => {
+    }).catch((error) => {
         // An error happened.
-      });
+    });
 }
 
 export async function passwordReset(email) {
@@ -74,17 +90,17 @@ export async function passwordReset(email) {
     }
 }
 
-export function redirectUserToHome(){
+export function redirectUserToHome() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/auth.user
-          const uid = user.uid;
-          console.log(uid)
-          window.location.href = '/';
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            const uid = user.uid;
+            console.log(uid)
+            window.location.href = '/';
         } else {
-          // User is signed out
-          console.log("User not logged in")
+            // User is signed out
+            console.log("User not logged in")
         }
     });
 }
