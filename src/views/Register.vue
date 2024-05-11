@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { createNewUser, redirectUserToHome } from '../backend/auth.js'
 import { useToast } from "vue-toastification";
 
-redirectUserToHome()
+//redirectUserToHome()
 
 export default {
     setup() {

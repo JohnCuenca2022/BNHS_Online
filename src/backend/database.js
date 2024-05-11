@@ -102,12 +102,15 @@ export async function addComment(docID, comment, userID) {
 
 export async function createNewUserData(userID, email, firstname, lastname, studentNumber) {
     try {
-        const docRef = setDoc(doc(db, "users", userID), {
+        const docRef = addDoc(doc(db, "users", userID), {
             email: email,
             firstname: firstname,
             lastname: lastname,
             studentNumber: studentNumber,
             dateJoined: Timestamp.now(),
+        }).then(() => {
+            window.location.href = '/';
+            console.log("user created")
         });
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {

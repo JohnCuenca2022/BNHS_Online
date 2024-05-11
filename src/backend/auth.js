@@ -19,7 +19,7 @@ export function createNewUser(email, password, firstname, lastname, studentNumbe
         // Signed up 
         const user = userCredential.user;
         createNewUserData(user.uid, email, firstname, lastname, studentNumber)
-        window.location.href = '/';
+        //window.location.href = '/';
     })
     .catch((error) => {
         const errorCode = error.code;
