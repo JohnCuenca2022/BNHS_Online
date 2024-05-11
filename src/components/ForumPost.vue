@@ -22,7 +22,7 @@
           <label for="text">Comment:</label>
           <textarea id="text" v-model="newComment.text" required></textarea>
         </div>
-        <button type="submit">Add Comment</button>
+        <button type="submit"><strong>Add Comment</strong></button>
       </form>
     </div>
     <!-- End Comment Form -->
