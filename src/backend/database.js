@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../firebaseConfig'
-import { 
+import {
     getFirestore,
     Timestamp,
     doc,
@@ -9,27 +9,28 @@ import {
     getDoc,
     getDocs,
     updateDoc,
-    deleteDoc 
+    deleteDoc,
+    collection
 } from "firebase/firestore";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export async function createAnnouncement(title, body, userID){
+export async function createAnnouncement(title, body, userID) {
     try {
         const docRef = await addDoc(collection(db, "announcements"), {
-          title: title,
-          body: body,
-          date: Timestamp.now(),
-          postedBy: userID
+            title: title,
+            body: body,
+            date: Timestamp.now(),
+            postedBy: userID
         });
         console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
+    } catch (e) {
         console.error("Error adding document: ", e);
-      }
+    }
 }
 
-export async function readAnnouncements(){
+export async function readAnnouncements() {
     const querySnapshot = await getDocs(collection(db, "announcements"));
     return querySnapshot
     // querySnapshot.forEach((doc) => {
@@ -37,7 +38,7 @@ export async function readAnnouncements(){
     //   });
 }
 
-export async function updateAnnouncement(title, body, docID){
+export async function updateAnnouncement(title, body, docID) {
     const announcementsRef = doc(db, "announcements", docID);
 
     await updateDoc(announcementsRef, {
@@ -46,25 +47,25 @@ export async function updateAnnouncement(title, body, docID){
     });
 }
 
-export async function deleteAnnouncement(docID){
+export async function deleteAnnouncement(docID) {
     await deleteDoc(doc(db, "announcements", docID));
 }
 
-export async function createPost(title, body, userID){
+export async function createPost(title, body, userID) {
     try {
         const docRef = await addDoc(collection(db, "forum_posts"), {
-          title: title,
-          body: body,
-          date: Timestamp.now(),
-          postedBy: userID
+            title: title,
+            content: content,
+            date: Timestamp.now(),
+            postedBy: userID
         });
         console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
+    } catch (e) {
         console.error("Error adding document: ", e);
-      }
+    }
 }
 
-export async function readPosts(){
+export async function readPosts() {
     const querySnapshot = await getDocs(collection(db, "forum_posts"));
     return querySnapshot
     // querySnapshot.forEach((doc) => {
@@ -72,7 +73,7 @@ export async function readPosts(){
     //   });
 }
 
-export async function updatePosts(title, body, docID){
+export async function updatePosts(title, body, docID) {
     const postsRef = doc(db, "forum_posts", docID);
 
     await updateDoc(postsRef, {
@@ -81,11 +82,11 @@ export async function updatePosts(title, body, docID){
     });
 }
 
-export async function deletePost(docID){
+export async function deletePost(docID) {
     await deleteDoc(doc(db, "forum_posts", docID));
 }
 
-export async function addComment(docID, comment, userID){
+export async function addComment(docID, comment, userID) {
     const newComment = {
         comment: comment,
         userID: userID,
@@ -99,7 +100,7 @@ export async function addComment(docID, comment, userID){
     });
 }
 
-export async function createNewUserData(userID, email, firstname, lastname, studentNumber){
+export async function createNewUserData(userID, email, firstname, lastname, studentNumber) {
     try {
         const docRef = setDoc(doc(db, "users", userID), {
           email: email,
@@ -111,12 +112,12 @@ export async function createNewUserData(userID, email, firstname, lastname, stud
             window.location.href = '/';
         });
         console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
+    } catch (e) {
         console.error("Error adding document: ", e);
-      }
+    }
 }
 
-export async function getUserData(userID){
+export async function getUserData(userID) {
     const docRef = doc(db, "users", userID);
     const docSnap = await getDoc(docRef);
 
@@ -125,5 +126,23 @@ export async function getUserData(userID){
     } else {
         // docSnap.data() will be undefined in this case
         return undefined
+    }
+}
+
+export async function isUserAdmin(userID) {
+    const docRef = doc(db, "users", userID);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("user is")
+        var isAdmin = docSnap.data().isAdmin
+        console.log(isAdmin)
+        if (docSnap.data().isAdmin == undefined) {
+            isAdmin = false
+        }
+        return isAdmin
+    } else {
+        // docSnap.data() will be undefined in this case
+        return false
     }
 }

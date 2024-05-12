@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
       <h2>Create Announcement</h2>
       <form @submit.prevent="submitAnnouncement">
@@ -41,4 +41,4 @@
     margin-bottom: 1rem;
   }
   </style>
-  
+   -->
