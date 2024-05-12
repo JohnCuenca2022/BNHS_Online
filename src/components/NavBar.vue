@@ -4,15 +4,16 @@ import { isUserAdmin } from "@/backend/database.js";
 
 export default {
   setup() {
+
+    
+
     return {
       signOutUser,
     };
   },
   data() {
     return {
-      condition: isUserAdmin(),
-      dynamicRoute: "/admin",
-      fallbackRoute: "/login",
+      isAdmin: isUserAdmin()
     };
   },
 };
@@ -71,7 +72,7 @@ export default {
         </li>
         <li class="nav-item">
           <router-link
-            :to="condition ? dynamicRoute : fallbackRoute"
+            to="/login"
             class="nav-link"
             ><img
               src="../assets/account.png"

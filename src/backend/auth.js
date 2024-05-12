@@ -54,7 +54,7 @@ export function getUser() {
     });
 }
 
-export function getUserID() {
+export async function getUserID() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             // User is signed in, see docs for a list of available properties
@@ -65,7 +65,7 @@ export function getUserID() {
         } else {
             // User is signed out
             console.log("User not logged in")
-            return undefined
+            return "Anonymous"
         }
     });
 }

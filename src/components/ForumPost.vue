@@ -1,15 +1,14 @@
 <template>
   <div class="forum-post">
-    <h4>{{ post.title }}</h4>
+    <h4><strong>{{ post.title }}</strong> - <em>{{formatFirebaseTimestamp(post.date)}}</em></h4>
     <p>{{ post.content }}</p>
 
     <!-- Previously Posted Comments Section -->
     <div v-if="true" class="previous-comments">
-      <!-- <h5>Previously Posted Comments</h5> -->
+      <h4><strong>Comments:</strong></h4>
       <ul>
         <li v-for="(comment, index) in post.comments" :key="index">
-          <strong>{{ comment.author }}</strong
-          >: {{ comment.text }}
+          <strong>{{ comment.username }}</strong>: {{ comment.comment }}
         </li>
       </ul>
     </div>
@@ -17,12 +16,12 @@
     <!-- Comment Form -->
     <div class="comment-section">
       <h5>Add a Comment</h5>
-      <form @submit.prevent="addComment">
+      <form @submit.prevent="">
         <div class="form-group">
           <label for="text">Comment:</label>
           <textarea id="text" v-model="newComment.text" required></textarea>
         </div>
-        <button type="submit"><strong>Add Comment</strong></button>
+        <button @click="submitComment('asdfasdf', post.id)"  type="button"><strong>Add Comment</strong></button>
       </form>
     </div>
     <!-- End Comment Form -->
@@ -30,6 +29,19 @@
 </template>
 
 <script>
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from '../firebaseConfig'
+import {
+    getAuth,
+    onAuthStateChanged
+} from "firebase/auth";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+import { getUserID } from '@/backend/auth';
+import { addComment, getUserName } from '@/backend/database';
+
 export default {
   props: {
     post: {
@@ -46,13 +58,43 @@ export default {
     };
   },
   methods: {
-    addComment() {
-      this.post.comments.push({
-        author: "Anonymous", // Defaulting to 'Anonymous'
-        text: this.newComment.text,
-      });
-      this.newComment.text = "";
+    // addComment() {
+    //   this.post.comments.push({
+    //     author: "Anonymous", // Defaulting to 'Anonymous'
+    //     text: this.newComment.text,
+    //   });
+    //   this.newComment.text = "";
+    // },
+
+    async submitComment(comment, docID){
+      console.log(docID)
+      var userID = await getUserID()
+      console.log("userID " + userID)
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const uid = user.uid;
+            const username = await getUserName(uid)
+            addComment(docID, comment, uid, username)
+        } else {
+            // User is signed out
+            console.log("User not logged in")
+            //return "Anonymous"
+        }
+    });
+
+      
     },
+
+    formatFirebaseTimestamp(timestamp) {
+      const jsDate = timestamp.toDate();
+      const dateOptions = { month: 'short', day: '2-digit', year: 'numeric' };
+      const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+      const formattedDate = jsDate.toLocaleDateString('en-US', dateOptions);
+      const formattedTime = jsDate.toLocaleTimeString('en-US', timeOptions);
+      const formattedDateTime = `${formattedDate} ${formattedTime}`;
+      return formattedDateTime;
+    }
   },
 };
 </script>

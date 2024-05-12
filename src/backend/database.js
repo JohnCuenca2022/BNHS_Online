@@ -10,7 +10,10 @@ import {
     getDocs,
     updateDoc,
     deleteDoc,
-    collection
+    collection,
+    query,
+    orderBy,
+    arrayUnion
 } from "firebase/firestore";
 
 const app = initializeApp(firebaseConfig);
@@ -51,13 +54,15 @@ export async function deleteAnnouncement(docID) {
     await deleteDoc(doc(db, "announcements", docID));
 }
 
-export async function createPost(title, body, userID) {
+export async function createPost(title, content, userID) {
     try {
         const docRef = await addDoc(collection(db, "forum_posts"), {
             title: title,
             content: content,
             date: Timestamp.now(),
             postedBy: userID
+        }).then(() => {
+            readPosts()
         });
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
@@ -66,7 +71,9 @@ export async function createPost(title, body, userID) {
 }
 
 export async function readPosts() {
-    const querySnapshot = await getDocs(collection(db, "forum_posts"));
+    const postsRef = collection(db, "forum_posts")
+    const q = query(postsRef, orderBy("date", "desc"));
+    const querySnapshot = await getDocs(q);
     return querySnapshot
     // querySnapshot.forEach((doc) => {
     //     console.log(`${doc.id} => ${doc.data()}`);
@@ -86,11 +93,12 @@ export async function deletePost(docID) {
     await deleteDoc(doc(db, "forum_posts", docID));
 }
 
-export async function addComment(docID, comment, userID) {
+export async function addComment(docID, comment, userID, username) {
     const newComment = {
         comment: comment,
         userID: userID,
         date: Timestamp.now(),
+        username: username
     }
 
     const postsRef = doc(db, "forum_posts", docID);
@@ -144,5 +152,21 @@ export async function isUserAdmin(userID) {
     } else {
         // docSnap.data() will be undefined in this case
         return false
+    }
+}
+
+export async function getUserName(userID){
+    const docRef = doc(db, "users", userID);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+    
+        var firstname = docSnap.data().firstname
+        var lastname = docSnap.data().lastname
+
+        return firstname + lastname
+    } else {
+        // docSnap.data() will be undefined in this case
+        return "Anonymous"
     }
 }

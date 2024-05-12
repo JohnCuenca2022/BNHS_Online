@@ -29,13 +29,13 @@
             <form action="/action_page.php">
               <div class="mb-3 mt-3">
                 <label for="comment">Title:</label>
-                <textarea class="form-control" rows="1" id="comment" name="text"></textarea>
+                <textarea v-model="title" class="form-control" rows="1" id="comment" name="text"></textarea>
               </div>
               <div class="mb-3">
                 <label for="anotherComment">Body:</label>
-                <textarea class="form-control" rows="3" id="anotherComment" name="anotherText"></textarea>
+                <textarea v-model="body" class="form-control" rows="3" id="anotherComment" name="anotherText"></textarea>
               </div>
-              <button type="submit" class="btn btn-success btn-lg">Submit</button>
+              <button @click="uploadPost" type="button" class="btn btn-success btn-lg">Submit</button>
             </form>
             <br>
             <br>
@@ -53,18 +53,51 @@
   
   <script>
   import ForumPost from '@/components/ForumPost.vue';
+  import { readPosts } from '@/backend/database';
+
+  const posts = await readPosts();
+  var postsList = [];
+  console.log(posts)
+  posts.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data().title}`);
+
+    console.log(doc.data().commentsList)
+
+    var post = {
+      id: doc.id,
+      title: doc.data().title,
+      content: doc.data().content,
+      date: doc.data().date,
+      comments: doc.data().commentsList || []
+    };
+
+    postsList.push(post);
+  });
   
   export default {
     components: {
       ForumPost
     },
+
+    methods: {
+      async uploadPost(){
+        const title = this.title;
+        const body = this.body;
+        if (title == ''){
+          return
+        }
+        if (body == ''){
+          return
+        }
+        createPost(title, body, "asdfasdfasdf")
+      }
+    },
+
     data() {
       return {
-        forumPosts: [
-          { id: 1, title: "First Forum Post", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-          { id: 2, title: "Second Forum Post", content: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
-          { id: 3, title: "Third Forum Post", content: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." }
-        ]
+        forumPosts: postsList,
+        title: '', 
+        body: ''   
       };
     }
   };
