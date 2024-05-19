@@ -42,7 +42,7 @@
   
             <!-- FORUM POSTS PLACEHOLDER -->
             <div class="forum-posts">
-              <ForumPost v-for="post in forumPosts" :key="post.id" :post="post" />
+              <ForumPost v-for="post in postsList" :key="post.id" :post="post" />
             </div>
           </div>
         </div>
@@ -54,27 +54,55 @@
   <script>
   import ForumPost from '@/components/ForumPost.vue';
   import { readPosts } from '@/backend/database';
+  import { ref, onMounted } from "vue";
 
-  const posts = await readPosts();
-  var postsList = [];
-  console.log(posts)
-  posts.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data().title}`);
+  // const posts = await readPosts();
+  // var postsList = [];
+  // console.log(posts)
+  // posts.forEach((doc) => {
+  //   console.log(`${doc.id} => ${doc.data().title}`);
 
-    console.log(doc.data().commentsList)
+  //   console.log(doc.data().commentsList)
 
-    var post = {
-      id: doc.id,
-      title: doc.data().title,
-      content: doc.data().content,
-      date: doc.data().date,
-      comments: doc.data().commentsList || []
-    };
+  //   var post = {
+  //     id: doc.id,
+  //     title: doc.data().title,
+  //     content: doc.data().content,
+  //     date: doc.data().date,
+  //     comments: doc.data().commentsList || []
+  //   };
 
-    postsList.push(post);
-  });
+  //   postsList.push(post);
+  // });
   
   export default {
+
+    setup() {
+      const postsList = ref([]);
+
+      onMounted(async () => {
+        const posts = await readPosts();
+        // announcementsList = [];
+        posts.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data().title}`);
+
+          var post = {
+            id: doc.id,
+            title: doc.data().title,
+            content: doc.data().content,
+            date: doc.data().date,
+            comments: doc.data().commentsList || []
+          };
+
+          postsList.value.push(post);
+        });
+      });
+
+      return {
+        postsList
+      }
+    },
+
     components: {
       ForumPost
     },
@@ -95,7 +123,7 @@
 
     data() {
       return {
-        forumPosts: postsList,
+        //forumPosts: postsList,
         title: '', 
         body: ''   
       };
